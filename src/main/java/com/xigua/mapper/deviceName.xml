@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xigua.dao.DeviceNameDao" >
+    <select id="getDeviceName" resultType="String" >
+        select 
+        deviceName
+        from devicename
+        where nodeId = #{nodeId,jdbcType=VARCHAR} 
+    </select>
+    <insert id="addDeviceById" useGeneratedKeys="true"> 
+        insert into devicename(nodeId,deviceName)  
+             values(#{nodeId},#{deviceName})  
+    </insert>
+    <delete id="deleteDeviceById" parameterType="String"> 
+        delete from devicename where nodeId = #{nodeId,jdbcType=VARCHAR}  
+    </delete>
+    <update id="changeName" parameterType="String">
+        update devicename
+        set deviceName = #{deviceName,jdbcType=VARCHAR}
+        where nodeId = #{nodeId,jdbcType=VARCHAR}
+    </update>
+</mapper>

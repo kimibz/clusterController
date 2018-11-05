@@ -1,0 +1,88 @@
+#globalTopoBackground {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.globalTopo{
+    width:1164px;
+    position:relative;
+    height:550px;
+}
+#globalTopo {
+    width:1164px;
+    position:absolute;
+    top:54px;
+    z-index:-3;
+}
+#topoRed {
+    width:1033px;
+    position: absolute;
+    left:54px;
+    z-index:-1;
+}
+#topoGreen {
+    width:830px;
+    position: absolute;
+    left:54px;
+    top:315px;
+    z-index:-2;
+}
+#onu1vlan {
+    position:absolute;
+    left:99px;
+    top:117px;
+}
+#onu1vlan2 {
+    position:absolute;
+    left:99px;
+    top:378px;
+}
+#vxlan1 {
+    position:absolute;
+    left:387px;
+    top:117px;
+}
+#vxlan2 {
+    position:absolute;
+    left:630px;
+    top:63px;
+}
+#vxlan3 {
+    position:absolute;
+    left:387px;
+    top:378px;
+}
+#vxlan4 {
+    position:absolute;
+    left:630px;
+    top:432px;
+}
+#onu2vlan {
+    position:absolute;
+    left:891px;
+    top:9px;
+}
+#cloudvlan {
+    position:absolute;
+    left:900px;
+    top:504px;
+}
+#gateway1 {
+    position:absolute;
+    left:54px;
+    top:288px;
+}
+#gateway2 {
+    position:absolute;
+    left:1053px;
+    top:153px;
+}
+#onu1vlan,#onu1vlan2,#onu2vlan,#vxlan1,#vxlan2,#vxlan3,#vxlan4,#cloudvlan {
+    font-family: "Helvetica Neue", Helvetica, "DejaVu Sans", Arial, sans-serif;
+    font-weight: bold;
+}
+#gateway1,#gateway2 {
+    font-family: 微软雅黑,黑体;
+    font-weight: 900;
+    font-size: 22px;
+}

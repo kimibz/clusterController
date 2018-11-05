@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xigua.dao.vxlanDao" >
+  <resultMap id="BaseResultMap" type="com.xigua.model.VxlanServiceModel" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="vlan" property="vlan" jdbcType="VARCHAR" />
+    <result column="vxlanA" property="vxlanA" jdbcType="VARCHAR" />
+    <result column="vxlanB" property="vxlanB" jdbcType="VARCHAR" />
+    <result column="destination" property="destination" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, source,vlan,vxlanA,vxlanB,destination
+  </sql>
+  <select id="getServiceInfo" resultMap="BaseResultMap" parameterType="int" >
+    select 
+    <include refid="Base_Column_List" />
+    from vlanService
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="getAllInfo" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from vlanService
+  </select>
+  <select id="find" resultMap="BaseResultMap" parameterType="String" >
+    select 
+    <include refid="Base_Column_List" />
+    from vlanService
+    where source = #{source,jdbcType=VARCHAR}
+    and vlan = #{vlan,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteServiceInfo" parameterType="int" >
+    delete from vlanService
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insertServiceInfo" parameterType="com.xigua.model.VxlanServiceModel" >
+    insert into vlanService
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="vlan != null" >
+        vlan,
+      </if>
+      <if test="vxlanA != null" >
+        vxlanA,
+      </if>
+      <if test="vxlanB != null" >
+        vxlanB,
+      </if>
+      <if test="destination != null" >
+        destination,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="vlan != null" >
+        #{vlan,jdbcType=INTEGER},
+      </if>
+      <if test="vxlanA != null" >
+        #{vxlanA,jdbcType=DATE},
+      </if>
+      <if test="vxlanB != null" >
+        #{vxlanB,jdbcType=VARCHAR},
+      </if>
+      <if test="destination != null" >
+        #{destination,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
