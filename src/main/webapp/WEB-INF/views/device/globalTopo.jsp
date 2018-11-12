@@ -372,7 +372,7 @@
                                                             <li {{if index == 0}}class="active"{{/if}}><a href="#tab-{{item.currency}}" data-toggle="tab">{{item.currency}}</a></li>
                                                             {{/each}}
                                                         {{else}}
-                                                            <li class="page-item"><a href="#tab-1" class="page-link">CNY</a></li>
+                                                            <li class="page-item"><a href="#tab-1" class="page-link"></a></li>
                                                         {{/if}}
                                                      </ul>
         </script>
@@ -383,13 +383,14 @@
     <script type="text/javascript" src="<c:url value="/resources/plugin/bootstrap-3.2.0/js/bootstrap.min.js" />"></script>
     <script type="text/javascript" src="<c:url value="/resources/plugin/pace-0.5.6/pace.min.js" />"></script>
     <script type="text/javascript" src="<c:url value="/resources/plugin/blockui/jquery.blockUI.js" />"></script>
+     <script type="text/javascript" src="<c:url value="/resources/plugin/artTemplate/template.js" />"></script>
     
-    
-    <script type="text/javascript" src="<c:url value="/resources/plugin/artTemplate/template.js" />"></script>
+    <script type="text/javascript" src="<c:url value="/resources/plugin/bootstrap-validator/bootstrapValidator.js" />"></script>
     <!-- GenesisUI main scripts -->
     <script type="text/javascript" src="<c:url value="/resources/js/app.js" />"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/xigua_local.js" />"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/util.js" />"></script>
+    
     <script type="text/javascript" src="<c:url value="/resources/js/globalTopo.js" />"></script>
     <!-- Plugins and scripts required by this views -->
 

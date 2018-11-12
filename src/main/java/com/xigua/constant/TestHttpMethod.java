@@ -1,23 +1,20 @@
 package com.xigua.constant;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.xigua.model.SysConfig;
-import com.xigua.util.HttpRequestUtil;
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.xigua.model.vlanId;
 
 public class TestHttpMethod {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        Map<String,String> map = new HashMap<String,String>();
-        map.put("A", "网关A");
-        map.put("B", "网关B");
-        map.put("C", "云");
-        String result = map.get("B");
-        System.out.println(result);
+        vlanId id = new vlanId();
+        id.setVlanId("123");
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_DASHES);
+        Gson gson = gsonBuilder.create();
+        String usersJson = gson.toJson(id);
+        System.out.println(usersJson);
     }
-
 }

@@ -17,4 +17,6 @@ public interface vxlanDao {
     void deleteServiceInfo(int index);
     //通过vlan和源 搜索数据库是否有重复
     VxlanServiceModel find(@Param("source") String source,@Param("vlan") String vlan);
+    //查询有木有重复的VXLAN
+    String findVxlan(String vxlanA);
 }

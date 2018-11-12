@@ -30,6 +30,12 @@
     where source = #{source,jdbcType=VARCHAR}
     and vlan = #{vlan,jdbcType=VARCHAR}
   </select>
+  <select id="findVxlan" resultType="String" parameterType="String" >
+    select 
+    id
+    from vlanService
+    where vxlanA = #{vxlanA,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteServiceInfo" parameterType="int" >
     delete from vlanService
     where id = #{id,jdbcType=INTEGER}

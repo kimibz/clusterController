@@ -83,6 +83,7 @@
         nodeId = $(this).attr("data-click-data");
         $("#deleteService").attr("data-click-data", nodeId); 
     }
+    
     //删除业务流
     function deleteServiceBind(){
         var index = $(this).attr("data-click-data");
@@ -105,32 +106,6 @@
         $.blockUI(util.getBlockOption());
         $.ajax(oAjaxOption);
     }
-    function checkIfVlan(){
-        var data = $("form").form2object();
-        data.vlan =$("#vlan").val();
-        var source = data.source;
-        var vlan = data.vlan;
-        var oAjaxOption = {
-                type: "get",
-                url: sContextPath + "/rest/vxlan/findService/"+source+"/"+vlan+".json",
-                contentType: "application/json",
-                dataType: "json",
-                success: function(oData, oStatus) {
-                        if(oData!=null){
-                            ifVlan = true;
-                        }else{
-                            ifVlan = false;
-                        }
-                },
-                error: function(oData, oStatus, eErrorThrow) { 
-                    util.handleAjaxError(oData, oStatus, eErrorThrow);
-                },
-                complete: function (oXmlHttpRequest, oStatus) {
-                }
-        };
-        $.ajax(oAjaxOption);
-
-    }
     //添加业务流
     function addService(){
         var data = $("form").form2object();
@@ -148,7 +123,7 @@
                     util.handleAjaxError(oData, oStatus, eErrorThrow);
                 },
                 complete: function (oXmlHttpRequest, oStatus) {
-                    setPage();
+                    initPage();
                     $.unblockUI();
                 }
         };
@@ -162,14 +137,49 @@
         var forms = document.getElementsByClassName('needs-validation');
         // Loop over them and prevent submission
         var vlan = parseInt($('#vlan').val());
+        $("#vlan").change(function () {
+            $('#vlan').removeClass('is-invalid');
+            var source = $("#source").val();
+            if(source != null){
+                var vlan = parseInt($('#vlan').val());
+                var url = sContextPath + "/rest/vxlan/findService/"+source+"/"+vlan+".json";
+                $.get(url,function(data,status){
+                    if(data!=""){
+                        ifVlan = true;
+                        $('#vlan').addClass('is-invalid');
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }else{
+                        ifVlan = false;
+                    }
+                });
+            }
+        });
         var validation = Array.prototype.filter.call(forms, function(form) {
         form.addEventListener('submit', function(event) {
             var vlan = parseInt($('#vlan').val());
             var source = $("#source").val();
-            if(!isNaN(vlan))
-                if(source!=null){
-                checkIfVlan();
-            }
+            /*if(vlan != ""){
+                var oAjaxOption = {
+                        type: "get",
+                        url: sContextPath + "/rest/vxlan/findService/"+source+"/"+vlan+".json",
+                        contentType: "application/json",
+                        dataType: "json",
+                        success: function(oData, oStatus) {
+                                if(oData!=null){
+                                    ifVlan = true;
+                                }else{
+                                    ifVlan = false;
+                                }
+                        },
+                        error: function(oData, oStatus, eErrorThrow) { 
+                            util.handleAjaxError(oData, oStatus, eErrorThrow);
+                        },
+                        complete: function (oXmlHttpRequest, oStatus) {
+                        }
+                };
+                $.ajax(oAjaxOption);
+            }*/
             //如果VLAN重复
             if(vlan=""||ifVlan||form.checkValidity() === false||vlan<0||vlan>4096){
                 $('#vlan').addClass('is-invalid');
@@ -177,6 +187,7 @@
                 event.stopPropagation();
             }else{
                 addService();
+                $("#spawnModal").modal('hide');
             }
             form.classList.add('was-validated');
             }, false);
@@ -190,6 +201,14 @@
         validateForm();
         $('#topoGreen').hide();
         $('#topoRed').hide();
+        $('#onu1vlan2').content("");
+        $('#cloudvlan').content("");
+        $('#vxlan3').content("");
+        $('#vxlan4').content("");
+        $('#onu1vlan').content("");
+        $('#onu2vlan').content("");
+        $('#vxlan1').content("");
+        $('#vxlan2').content("");
     }
     function initPage() {
 //        // 画面事件绑定及JS插件渲染

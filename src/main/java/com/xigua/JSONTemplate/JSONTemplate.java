@@ -83,4 +83,34 @@ public class JSONTemplate {
 	public static String defaultVlan ="{\"zxr10-vlan-dev-c600:if-default-vlan\": "
 			+ "[{\"zxr10-vlan-dev-c600:default-vlan-id\": \"\",\"zxr10-vlan-dev-c600"
 			+ ":if-sub-index\": \"\",\"zxr10-vlan-dev-c600:if-index\": \"\"}]}";
+	/*
+	 * zte-vxlan Tunnel
+	 */
+	public static String zte_vxlanTunnel = "{\"ctc-vxlan:static-vxlan-tunnel\":[{\"ctc-vxlan:tunnel-destination-ip"
+	        + "\":\"\",\"ctc-vxlan:vxlan-tunnel-id\":\"\",\"ctc-vxlan:vxlan-tunnel-name\":\"\",\""
+	        + "ctc-vxlan:tunnel-source-ip\":\"\"}]}";
+	/*
+	 * fiberhome vxlan Tunnel
+	 */
+	public static String fiberhome_vxlanTunnel = "{\"ctc-vxlan:static-vxlan-tunnel\":[{\"ctc-vxlan:tunnel-"
+	        + "destination-ip\":\"\",\"ctc-vxlan:vxlan-tunnel-id\":\"\",\"ctc-vxlan:vxlan-tunnel-name\":\"\",\""
+	        + "ctc-vxlan:tunnel-source-ip-prefix-len\":\"\",\"ctc-vxlan:tunnel-source-ip\":\"\"}]}";
+	/*
+	 * global enable
+	 */
+	public static String globalEnable = "{\"ctc-vxlan:vxlan\":{\"ctc-vxlan:global-enable\":\"\"}}";
+	/*
+	 * create vni
+	 */
+	public static String createVni = "{\"ctc-vxlan:vxlan-instance\":[{\"access-type-vlan\":\"access-type-vlan1to1"
+	        + "\",\"ctc-vxlan:vxlan-id\":\"\"}]}";
+	/*
+	 * bind vni tunnel
+	 */
+	public static String bindVNI = "{\"ctc-vxlan:static-vxlan-tunnel\":[{\"ctc-vxlan:vxlan-tunnel-id\":\"\",\""
+	        + "ctc-vxlan:vxlan-tunnel-name\":\"\",\"ctc-vxlan:bind-vxlan-id\":[{\"ctc-vxlan:vxlan-id\":\"\"}]}]}";
+	/*
+	 * bind vlan-ac
+	 */
+	public static String vlan_ac = "{\"vxlan-instance\":[{\"vxlan-id\":\"\",\"access-vlan-list\":[{\"vlan-id\":\"\"}]}]}";
 }
