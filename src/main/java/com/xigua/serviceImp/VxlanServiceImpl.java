@@ -31,6 +31,9 @@ public class VxlanServiceImpl implements VxlanService{
     
     private static String Ipaddress = ControllerSettings.ip;
     
+    private static String node = "17830";
+    private static String nodeB = "fiberhome";
+    
     @Override
     public List<VxlanServicePage> getAll() {
         // TODO Auto-generated method stub
@@ -68,6 +71,7 @@ public class VxlanServiceImpl implements VxlanService{
         map.put("A", "网关A");
         map.put("B", "网关B");
         map.put("C", "云");
+        map.put("D","网关C");
         String result = map.get(usr);
         return result;
     }
@@ -82,25 +86,25 @@ public class VxlanServiceImpl implements VxlanService{
     @Override
     public void deleteSingleModel(String index) {
         // TODO Auto-generated method stub
-        String node = "17830";
-;        VxlanServiceModel model = dao.getServiceInfo(Integer.parseInt(index));
+;       VxlanServiceModel model = dao.getServiceInfo(Integer.parseInt(index));
         String vxlanA = model.getVxlanA();
         String vxlanB = model.getVxlanB();
         deleteConfigVxlan(node,vxlanA);
+        deleteConfigVxlan(nodeB,vxlanB);
         dao.deleteServiceInfo(Integer.parseInt(index));
     }
     @Override
     public void addSingleModel(vxlanAddModel model) {
         // TODO Auto-generated method stub
-        String node = "17830";
         VxlanServiceModel Amodel = new VxlanServiceModel();
         Amodel.setSource(model.getSource());
         Amodel.setDestination(model.getDestination());
         Amodel.setVlan(model.getVlan());
         String vxlanA = randomVxlan();
+        String vxlanB = randomVxlanB();
         Amodel.setVxlanA(vxlanA);
         if(model.getDestination().equals("B")) {
-            Amodel.setVxlanB("4568");
+            Amodel.setVxlanB(vxlanB);
         }else {
             Amodel.setVxlanB("6666");
         }
@@ -109,10 +113,13 @@ public class VxlanServiceImpl implements VxlanService{
         setVxlanTunnel(node);
         //创建vxlan实例
         setVxlanInstance(node,vxlanA);
+        setVxlanInstance(nodeB,vxlanB);
         //vlan-ac绑定
         bindVlan(model.getVlan(),vxlanA,node);
+        bindVlan(model.getVlan(),vxlanB,nodeB);
         //隧道-VNI绑定
         bindVxlan(node ,vxlanA);
+        bindVxlan(nodeB ,vxlanB);
         dao.insertServiceInfo(Amodel);
     }
     //vxlan global enable
@@ -211,8 +218,8 @@ public class VxlanServiceImpl implements VxlanService{
         String url2 = Ipaddress + "/restconf/config/network-topology:network-topology/topology/"
                 + "topology-netconf/node/17830/yang-ext:mount/ctc-vxlan:vxlan/"
                 + "static-vxlan-tunnel/"+nodeId+"/bind-vxlan-id/"+vxlan;
+       //HttpRequestUtil.Delete(url2);
         HttpRequestUtil.Delete(url);
-        //HttpRequestUtil.Delete(url2);
     }
     @Override
     public VxlanServiceModel findModel(String source, String vlan) {
@@ -220,7 +227,7 @@ public class VxlanServiceImpl implements VxlanService{
         VxlanServiceModel model = dao.find(source, vlan);
         return model;
     }
-    //随机vxlan 
+    //随机vxlan A
     public String randomVxlan() {
         boolean ifVxlan = true;
         String result = null;
@@ -228,6 +235,20 @@ public class VxlanServiceImpl implements VxlanService{
             Long vxlan = 1+(((long) (new Random().nextDouble()*(5000L))));
             result = vxlan + "";
             String id = dao.findVxlan(result);
+            if(id == null) {
+                ifVxlan = false;
+            }
+        }
+        return result;
+    }
+    //随机Vxlan B
+    public String randomVxlanB() {
+        boolean ifVxlan = true;
+        String result = null;
+        while(ifVxlan) {
+            Long vxlan = 1+(((long) (new Random().nextDouble()*(5000L))));
+            result = vxlan + "";
+            String id = dao.findVxlanB(result);
             if(id == null) {
                 ifVxlan = false;
             }

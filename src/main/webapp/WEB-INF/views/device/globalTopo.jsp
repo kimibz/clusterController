@@ -175,21 +175,31 @@
             </ol>
 
             <!-- 网页主体 -->
-            <div class="container-fluid" id="globalTopoBackground">
-                <div class="globalTopo">
-                <span id="onu1vlan"></span>
-                <span id="onu1vlan2"></span>
-                <span id="vxlan1"></span>
-                <span id="vxlan2"></span>
-                <span id="vxlan3"></span>
-                <span id="vxlan4"></span>
-                <span id="onu2vlan"></span>
-                <span id="cloudvlan"></span>
-                <span id="gateway1">政企网关</span>
-                <span id="gateway2">政企网关</span>
-                <img src=<c:url value="/resources/img/globalTopo/红.png"/> id="topoRed" />
-                <img src=<c:url value="/resources/img/globalTopo/拓扑.png"/> id="globalTopo" />
-                <img src=<c:url value="/resources/img/globalTopo/绿.png"/> id="topoGreen" />
+            <div>
+                <div class="container-fluid" id="globalTopoBackground">
+                    <div class="globalTopo">
+                    <span id="onu1vlan">用户规划VLAN:100</span>
+                    <span id="onu1vlan2">用户规划VLAN:200</span>
+                    <span id="vxlan1">VxLAN1:1000</span>
+                    <span id="vxlan2">VxLAN2:2000</span>
+                    <span id="vxlan3">VxLAN1:3000</span>
+                    <span id="vxlan4">VxLAN2:4000</span>
+                    <span id="vxlan5">VxLan2:5000</span>
+                    <span id="onu2vlan">用户规划VLAN:100</span>
+                    <span id="cloudvlan">用户规划VLAN:200</span>
+                    <span id="onu3vlan">用户规划VLAN:300</span>
+                    <span id="gateway1">政企网关A</span>
+                    <span id="gateway2">政企网关B</span>
+                    <span id="gateway3">政企网关C</span>
+                    <span id="olt1">中兴</span>
+                    <span id="olt2">烽火</span>
+                    <span id="olt3">华为OLT</span>
+                    <img src=<c:url value="/resources/img/globalTopo/红.png"/> id="topoRed" />
+                    <img src=<c:url value="/resources/img/globalTopo/拓扑.png"/> id="globalTopo" />
+                    <img src=<c:url value="/resources/img/globalTopo/绿.png"/> id="topoGreen" />
+                    <img src=<c:url value="/resources/img/globalTopo/尾.png"/> id="globalTopo2" />
+                    <img src=<c:url value="/resources/img/globalTopo/黄.png"/> id="topoYellow" />
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -228,7 +238,7 @@
                                       <div class="col-md-8">
                                            <select id="source" name="source" class="selectpicker show-tick form-control" required>
                                                 <option value="" disabled selected>请选择源用户</option>
-                                                <option value="A">A</option>
+                                                <option value="A">网关A</option>
                                            </select>
                                       <div class="invalid-feedback">请选择用户</div>
                                       </div>
@@ -247,8 +257,9 @@
                                      <div class="col-md-8">
                                            <select id="destination" name="destination" class="selectpicker show-tick form-control" required>
                                                 <option value="" disabled selected>请选择目标用户</option>
-                                                <option value="B">B</option>
+                                                <option value="B">网关B</option>
                                                 <option value="C">云</option>
+                                                <option value="d">网关C</option>
                                            </select>
                                       <div class="invalid-feedback">请选择用户</div>
                                       </div>

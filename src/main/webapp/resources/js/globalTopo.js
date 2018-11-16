@@ -56,26 +56,47 @@
     function setPicture(oData){
         if(oData.destination=="B"){
             $('#topoGreen').hide();
+            $('#topoYellow').hide();
             $('#topoRed').show(500);
             $('#onu1vlan2').content("");
             $('#cloudvlan').content("");
             $('#vxlan3').content("");
             $('#vxlan4').content("");
+            $('#onu3vlan').content("");
+            $('#vxlan5').content("");
             $('#onu1vlan').content("用户规划VLAN:"+oData.vlan)
             $('#onu2vlan').content("用户规划VLAN:"+oData.vlan)
             $('#vxlan1').content("VxLAN1:"+oData.vxlanA)
             $('#vxlan2').content("VxLAN2:"+oData.vxlanB)
         }else if(oData.destination=="C"){
             $('#topoRed').hide();
+            $('#topoYellow').hide();
             $('#topoGreen').show(500);
             $('#onu1vlan').content("");
             $('#onu2vlan').content("");
             $('#vxlan1').content("");
             $('#vxlan2').content("");
+            $('#onu3vlan').content("");
+            $('#vxlan5').content("");
             $('#onu1vlan2').content("用户规划VLAN:"+oData.vlan)
             $('#cloudvlan').content("用户规划VLAN:"+oData.vlan)
             $('#vxlan3').content("VxLAN1:"+oData.vxlanA)
             $('#vxlan4').content("VxLAN2:"+oData.vxlanB)
+        }
+        else if(oData.destination=="D"){
+            $('#topoRed').hide();
+            $('#topoGreen').hide();
+            $('#topoYellow').show(500);
+            $('#onu1vlan').content("");
+            $('#onu2vlan').content("");
+            $('#vxlan1').content("");
+            $('#vxlan2').content("");
+            $('#cloudvlan').content("");
+            $('#vxlan4').content("");
+            $('#onu1vlan2').content("用户规划VLAN:"+oData.vlan)
+            $('#onu3vlan').content("用户规划VLAN:"+oData.vlan)
+            $('#vxlan3').content("VxLAN1:"+oData.vxlanA)
+            $('#vxlan5').content("VxLAN2:"+oData.vxlanB)
         }
     }
     //绑定ID
@@ -139,8 +160,8 @@
         var vlan = parseInt($('#vlan').val());
         $("#vlan").change(function () {
             $('#vlan').removeClass('is-invalid');
-            var source = $("#source").val();
-            if(source != null){
+            var source = "A";
+            //if(source != null){
                 var vlan = parseInt($('#vlan').val());
                 var url = sContextPath + "/rest/vxlan/findService/"+source+"/"+vlan+".json";
                 $.get(url,function(data,status){
@@ -153,7 +174,7 @@
                         ifVlan = false;
                     }
                 });
-            }
+            //}
         });
         var validation = Array.prototype.filter.call(forms, function(form) {
         form.addEventListener('submit', function(event) {
@@ -201,6 +222,7 @@
         validateForm();
         $('#topoGreen').hide();
         $('#topoRed').hide();
+        $('#topoYellow').hide();
         $('#onu1vlan2').content("");
         $('#cloudvlan').content("");
         $('#vxlan3').content("");
@@ -209,6 +231,8 @@
         $('#onu2vlan').content("");
         $('#vxlan1').content("");
         $('#vxlan2').content("");
+        $('#onu3vlan').content("");
+        $('#vxlan5').content("");
     }
     function initPage() {
 //        // 画面事件绑定及JS插件渲染
